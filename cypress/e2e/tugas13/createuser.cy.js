@@ -1,14 +1,11 @@
 /// <reference types="cypress" />
-describe('example to-do app', () => {
-    beforeEach(() => {
-        cy.visit('https://example.cypress.io/todo')
+describe('Reqres API Testing- Get User List', () => {
+      it('get list user', () => {
+        cy.request({
+          methode: 'GET',
+          url:'https://reqres.in/api/users?page=2'
+      }).then((response) => {
+        expect(response.status).to.equal(200)
       })
-      it('can add new todo items', () => {
-        const newItem = 'Create code for testing'
-        cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
-        cy.get('.todo-list li')
-          .should('have.length', 3)
-          .last()
-          .should('have.text', newItem)
       })
 })
